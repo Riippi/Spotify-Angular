@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>Angular.js Spotify search</title>
+</head>
+
+<body>
+
+    <div class="wrapper" ng-controller="myCtrl">
+
+        <div class="header">
+            <h3>Simple Spotify search with Angular</h3>
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <input name="queryText" type="text" ng-model="query" class="form-control" placeholder="type something">
+                </div>
+                <button ng-click="search()" ng-disabled="searchForm.$invalid" class="btn btn-default">Search</button>
+            </form>
+
+        </div>
+
+        <!-- Divs for search results -->
+
+        <div class="col-md-4" id="div-1">
+            <h4>Artists</h4>
+
+            <div ng-repeat="i in myData.artists" class="clickable" data-toggle="tooltip" data-placement="top" title="Open in Spotify">
+                <a href="{{i.uri}}"></a>
+                <img src="{{getImage(i.images)}}" class="list">
+                <b>{{ i.name }}</b>
+            </div>
+        </div>
+
+        <div class="col-md-4" id="div-2">
+            <h4>Albums</h4>
+
+
+            <div ng-repeat="i in myData.albums" class="clickable" data-toggle="tooltip" data-placement="top" title="Open in Spotify">
+                <a href="{{i.uri}}"></a>
+                <img src="{{getImage(i.images)}}" class="list">
+                <b>{{ i.name }}</b>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-4" id="div-3">
+            <h4>Tracks</h4>
+
+            <div ng-repeat="i in myData.tracks" class="clickable" data-toggle="tooltip" data-placement="top" title="Open in Spotify">
+                <a href="{{i.uri}}"></a>
+                <b>{{i.name}}</b>
+                <p ng-if="i.artists">
+                    {{parseArtistsForTrack(i.artists)}}
+                </p>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- Needed to keep the footer down (Ryan Fait's HTML5 CSS Sticky Footer) -->
+        <div class="push"></div>
+    </div>
+
+
+
+    <div class="footer">
+        <p>This site uses <a href="https://angularjs.org/">Angular.js</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and
+            <a href="https://developer.spotify.com/web-api/">Spotify web API</a>.
+            <br> Made for practice by Mikko Riippi.
+        </p>
+    </div>
+
+
+</body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+</html>
